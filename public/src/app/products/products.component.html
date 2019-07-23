@@ -1,0 +1,28 @@
+<button class="btn btn-success mr-3 float-right" [routerLink]="['new']">Add New Product</button>
+<h1 class="ml-2">Product List</h1>
+
+<!-- {{ products | json }} -->
+<div class="mr-3 ml-3">
+<table class="table mt-5">
+    <thead class="thead-light">
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Price</th>
+        <th scope="col">Actions</th>
+    </thead>
+    <tbody>
+        <tr class="products" *ngFor="let product of products">
+            <th scope="row" class="h3">{{ product._id }}</th>
+            <td class="h3">{{ product.name }}</td>
+            <td class="h3">{{ product.quantity }}</td>
+            <td class="h3">${{ product.price.toFixed(2) }}</td>
+            <td class="">
+                <!-- <button class="btn btn-secondary mr-2" [routerLink]="[(restaurant._id)]">Read Reviews</button> -->
+                <button class="btn btn-warning mr-2" (click)="showEdit(product._id)">Edit</button>
+                <button class="btn btn-danger" (click)="showOne(product._id)">Details</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,101 @@
+
+<div class="h1 ml-2">Add a new Product!</div>
+<div class="mr-3 ml-3 mb-4">
+
+    <form (submit)="createNewProduct()">
+        <!-- {{newProduct | json}} -->
+        <div class="row">
+            
+            <div class="col">
+                <h3 class="mt-3">Name</h3>
+            </div>
+            <div class="col">
+                <div *ngIf = "errProduct.name != ''"><p class="text-danger">{{ errProduct.name }}</p></div>
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="p text-danger">
+
+                    <div *ngIf="name.errors.required">
+                        Name is required.
+                    </div>
+                    <div *ngIf="name.errors.minlength">
+                        Name must be at least 3 characters long.
+                    </div>
+                    <div *ngIf="name.errors.forbiddenName">
+                        Name cannot be Bob.
+                    </div>
+
+                </div>
+                <input type="text" placeholder="Name" class = "form-control mt-3 w-100" name="name" id="name" required minlength="3" [(ngModel)]="newProduct.name" #name="ngModel">
+            </div>
+            <div class="col">
+                <!-- intentionally empty for formatting -->
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col">
+                <h3 class="mt-3">Qty</h3>
+            </div>
+            <div class="col">
+                <div *ngIf = "errProduct.quantity != ''"><p class="text-danger">{{ errProduct.quantity }}</p></div>
+                <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)" class="p text-danger">
+                    <div *ngIf="quantity.errors.required">
+                        Quantity is required.
+                    </div>
+                    <div *ngIf="quantity.errors.min">
+                        Quantity must be 0 or greater.
+                    </div>
+                </div>
+                <input type="number" placeholder="Quantity" class = "form-control w-100 mt-3" name="quantity" id="quantity" required min="0" [(ngModel)]="newProduct.quantity" #quantity="ngModel">
+            </div>
+            <div class="col">
+                <!-- intentionally empty for formatting -->
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col">
+                <h3 class="mt-3">Price</h3>
+            </div>
+            <div class="col">
+                <div *ngIf = "errProduct.price != ''"><p class="text-danger">{{ errProduct.price }}</p></div>
+                <div *ngIf="price.invalid && (price.dirty || price.touched)" class="p text-danger">
+
+                    <div *ngIf="price.errors.required">
+                        Price is required.
+                    </div>
+                    <div *ngIf="price.errors.min">
+                        Price must be 0 or greater.
+                    </div>
+
+                </div>
+                <input type="number" min="0.01" step="0.01" placeholder="Price" class = "form-control w-100 mt-3" name="price" id="price" required [(ngModel)]="newProduct.strPrice" #price="ngModel">
+            </div>
+            <div class="col">
+                <!-- intentionally empty for formatting -->
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col">
+                <!-- intentionally empty for formatting -->
+            </div>
+            <div class="col">
+                <div *ngIf = "price.invalid || quantity.invalid || name.invalid; else okToSubmit">
+                    <input type="submit" class="btn btn-primary mt-3 col-5 float-right" value="Create" disabled>
+                </div>
+                <ng-template #okToSubmit>
+                    <input type="submit" class="btn btn-primary mt-3 col-5 float-right" value="Create" >
+                </ng-template>
+                
+                <div class="btn btn-secondary mt-3 mr-3 col-5" [routerLink]="['/']">Cancel</div>
+            </div>
+            <div class="col">
+                <!-- intentionally empty for formatting -->
+            </div>
+        </div>
+        
+        
+        
+
+    </form>
+</div>
